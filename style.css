@@ -1,0 +1,107 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0a0a0a; /* Dark background by default */
+  color: #ffffff; /* Light text color by default */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for dark mode */
+}
+
+body.light-mode {
+  background-color: #f4f4f4; /* Light background */
+  color: #333; /* Dark text color */
+}
+
+.container {
+  text-align: center;
+  background-color: #232323; /* Darker container background by default */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Lighter shadow for dark mode */
+  transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for dark mode */
+}
+
+body.light-mode .container {
+  background-color: white; /* Light container background */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Darker shadow for light mode */
+}
+
+input,
+select,
+button {
+  margin: 5px;
+  padding: 10px;
+  width: 200px;
+  background-color: #555; /* Darker input background by default */
+  color: #f4f4f4; /* Light text color by default */
+  border: 1px solid #777; /* Darker border color by default */
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for dark mode */
+}
+
+body.light-mode input,
+body.light-mode select,
+body.light-mode button {
+  background-color: white; /* Light input background */
+  color: #333; /* Dark text color */
+  border-color: #ccc; /* Lighter border color */
+}
+
+#output {
+  margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+}
+
+.result {
+  color: #f4f4f4; /* Light text color for results in dark mode */
+}
+
+body.light-mode .result {
+  color: black; /* Dark text color for results in light mode */
+}
+
+footer {
+  position: fixed; /* Lock to the bottom of the screen */
+  bottom: 0; /* Position at the bottom */
+  left: 0; /* Stretch across the width */
+  width: 100%; /* Full width */
+  padding: 10px;
+  text-align: center;
+  transition: background-color 0.3s; /* Smooth transition for dark mode */
+}
+
+footer a {
+  color: #c0c0c0; /* Light grey link color */
+  text-decoration: none; /* Remove underline */
+}
+
+footer a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+
+.dark-mode-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for dark mode */
+}
+
+body.light-mode .dark-mode-toggle {
+  background-color: #f4f4f4;
+  color: #333;
+}

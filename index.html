@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitrate Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="dark-mode">
+
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+
+    <div class="container">
+        <h1>Bitrate Calculator</h1>
+
+        <label for="video_length">Input Length:</label>
+        <input type="number" id="video_length" placeholder="Enter a number">
+        <select id="timeUnit">
+            <option value="seconds">Seconds</option>
+            <option value="minutes">Minutes</option>
+            <option value="hours">Hours</option>
+        </select><br>
+
+        <label for="file_size">Input File Size:</label>
+        <input type="number" id="file_size" placeholder="Enter a number">
+        <select id="sizeUnit">
+            <option value="kb">KB</option>
+            <option value="mb" selected>MB</option>
+            <option value="gb">GB</option>
+        </select><br>
+
+        <button onclick="calculate()">Calculate</button>
+
+        <div id="output"></div>
+    </div>
+
+    <footer>
+        <p><a href="https://github.com/EndCod3r/bitrate-calculator" target="_blank">View on GitHub</a></p>
+    </footer>
+
+    <script>
+        function calculate() {
+            // Gets the values from the input boxes
+            const video_length = document.getElementById('video_length').value;
+            const file_size = document.getElementById('file_size').value;
+
+            // Gets the output element
+            const outputElement = document.getElementById('output');
+
+            // Checks if the inputs are empty or not valid numbers
+            if (video_length === "" || file_size === "" || isNaN(parseFloat(video_length)) || isNaN(parseFloat(file_size))) {
+                outputElement.innerText = "Make sure you entered the values correctly!";
+                outputElement.className = "error";
+                return; // Returns if inputs are invalid
+            }
+
+            // Converts inputs to float
+            const video_length_float = parseFloat(video_length);
+            const file_size_float = parseFloat(file_size);
+
+            const timeUnit = document.getElementById('timeUnit').value;
+            const sizeUnit = document.getElementById('sizeUnit').value;
+
+            // Converts video_length to seconds if not already
+            let timeInSeconds;
+            switch (timeUnit) {
+                case 'minutes':
+                    timeInSeconds = video_length_float * 60;
+                    break;
+                case 'hours':
+                    timeInSeconds = video_length_float * 3600;
+                    break;
+                default: // seconds
+                    timeInSeconds = video_length_float;
+            }
+
+            // Converts file_size to MB if not already
+            let sizeInMB;
+            switch (sizeUnit) {
+                case 'kb':
+                    sizeInMB = file_size_float / 1024; // Convert KB to MB
+                    break;
+                case 'gb':
+                    sizeInMB = file_size_float * 1024; // Convert GB to MB
+                    break;
+                default: // mb
+                    sizeInMB = file_size_float;
+            }
+
+            // Calculates the bitrate
+            const result = (sizeInMB * 8000) / timeInSeconds;
+
+            const roundedResult = Math.ceil(result);
+
+            outputElement.innerText = `Result: ${roundedResult} Kbps`;
+            outputElement.className = "result";
+        }
+
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle('dark-mode'); // Toggles dark mode
+            body.classList.toggle('light-mode'); // Toggles light mode
+        }
+    </script>
+
+</body>
+
+</html>
